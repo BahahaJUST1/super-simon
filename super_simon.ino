@@ -8,6 +8,30 @@
 #define YEL_BTN 14
 #define RED_BTN 13
 
+
+int last_choice = 0;
+
+int tableau_simon[10] = {};
+int tableau_joueur[10] = {}; 
+
+
+
+void game()
+{
+    for (int i = 0; i < 10; i++) {
+        tableau_simon[i] = random(1, 5);
+        delay(500);
+    }
+    
+    Serial.println("Contenu du tableau :");
+    for (int i = 0; i < 10; i++) {
+        Serial.print(tableau_simon[i]);
+        Serial.print(" ");
+    }
+    Serial.println();
+}
+
+
 void setup()
 {
     Serial.begin(115200);
@@ -21,6 +45,8 @@ void setup()
     pinMode(GRN_BTN, INPUT_PULLUP);
     pinMode(YEL_BTN, INPUT_PULLUP);
     pinMode(RED_BTN, INPUT_PULLUP);
+
+    game();
 }
 
 void loop()
@@ -34,6 +60,7 @@ void loop()
     // ====== BLEU ======//
     if (blu_btn_val == LOW) {
         digitalWrite(BLU_LED, HIGH);
+        last_choice = 1;
     }
     else {
         digitalWrite(BLU_LED, LOW);
@@ -43,6 +70,7 @@ void loop()
     // ====== VERT ======//
     if (grn_btn_val == LOW) {
         digitalWrite(GRN_LED, HIGH);
+        last_choice = 2;
     }
     else {
         digitalWrite(GRN_LED, LOW);
@@ -52,6 +80,7 @@ void loop()
     // ====== JAUNE ======//
     if (yel_btn_val == LOW) {
         digitalWrite(YEL_LED, HIGH);
+        last_choice = 3;
     }
     else {
         digitalWrite(YEL_LED, LOW);
@@ -61,6 +90,7 @@ void loop()
     // ====== ROUGE ======//
     if (red_btn_val == LOW) {
         digitalWrite(RED_LED, HIGH);
+        last_choice = 4;
     }
     else {
         digitalWrite(RED_LED, LOW);
